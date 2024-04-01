@@ -3,9 +3,9 @@ import time
 
 data = []
 
-# 打开 CSV 文件
+# Open CSV file
 with open('all_seasons.csv', newline='') as csvfile:
-    # 创建 CSV 字典读取器，指定列名
+    #Create a CSV dictionary reader, specify column names
     reader = csv.DictReader(csvfile, fieldnames=[
         "index", "player_name", "team_abbreviation", "age", "player_height",
         "player_weight", "college", "country", "draft_year", "draft_round",
@@ -13,16 +13,13 @@ with open('all_seasons.csv', newline='') as csvfile:
         "dreb_pct", "usg_pct", "ts_pct", "ast_pct", "season"
     ])
 
-    # 跳过标题行（如果存在）
     next(reader)
 
-    # 遍历读取 CSV 文件的每一行
     for row in reader:
-        # 将每行数据转换为字典并添加到列表中
         data.append(dict(row))
 
 def dominates(point1, point2, attributes):
-    # 检查 point1 是否支配 point2（假设更大的值更优）
+    # Check if point1 dominates point2 (assuming larger values ​​are better)
     return all(float(point1[attr]) >= float(point2[attr]) for attr in attributes) and any(float(point1[attr]) > float(point2[attr]) for attr in attributes)
 
 def find_skyline(data, attributes):
@@ -41,7 +38,7 @@ def find_skyline(data, attributes):
             skyline.append(point)
     return skyline
 
-# 指定进行 Skyline 查询的属性
+# Specify the properties for Skyline query
 attributes_to_compare = ['gp','pts', 'reb','ast', 'net_rating', 'oreb_pct',
         'dreb_pct', 'usg_pct', 'ts_pct', 'ast_pct']
 
