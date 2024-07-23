@@ -3,7 +3,7 @@ import random
 # Generate random data
 services = ['MAPPMatching', 'Compound2', 'USDAData', 'GBNIRHolidayDates', 'CasUsers', 'interop2']
 batch_size = 10000  # Generate data in batches, each batch of data is 10,000 rows
-print("正在生成数据集")
+print("Generating dataset")
 with open('data.txt', 'w') as f:
     for batch in range(800):  # A total of 50 batches of data were generated, with a total of 8,000,000
         data = []
