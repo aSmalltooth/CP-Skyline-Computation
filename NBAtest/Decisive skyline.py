@@ -3,9 +3,9 @@ import time
 from itertools import combinations
 data = []
 
-# 打开 CSV 文件
+# Open CSV file
 with open('all_seasons.csv', newline='') as csvfile:
-    # 创建 CSV 字典读取器，指定列名
+    # Create CSV dictionary reader, specify column names
     reader = csv.DictReader(csvfile, fieldnames=[
         "index", "player_name", "team_abbreviation", "age", "player_height",
         "player_weight", "college", "country", "draft_year", "draft_round",
@@ -13,16 +13,16 @@ with open('all_seasons.csv', newline='') as csvfile:
         "dreb_pct", "usg_pct", "ts_pct", "ast_pct", "season"
     ])
 
-    # 跳过标题行（如果存在）
+    # Skip the header row (if present)
     next(reader)
 
-    # 遍历读取 CSV 文件的每一行
+    # Iterate over each row in the CSV file
     for row in reader:
-        # 将每行数据转换为字典并添加到列表中
+        # Convert each row to a dictionary and add to the list
         data.append(dict(row))
 
 def dominates(point1, point2, attributes):
-    # 检查 point1 是否支配 point2（假设更大的值更优）
+    # Check if point1 dominates point2 (assuming larger values are better)
     return all(float(point1[attr]) >= float(point2[attr]) for attr in attributes) and any(float(point1[attr]) > float(point2[attr]) for attr in attributes)
 
 def find_skyline(data, attributes):
@@ -41,9 +41,8 @@ def find_skyline(data, attributes):
             skyline.append(point)
     return skyline
 
-# 指定进行 Skyline 查询的属性
+# Specify the attributes for Skyline query
 attributes_to_compare = ['pts','reb','ast','net_rating','usg_pct']
-
 
 start = time.perf_counter()
 result = find_skyline(data, attributes_to_compare)
@@ -51,11 +50,11 @@ result = find_skyline(data, attributes_to_compare)
 all_subsets = [list(subset) for subset_size in range(1, len(attributes_to_compare) + 1)
                for subset in combinations(attributes_to_compare, subset_size)]
 
-# 输出所有子集
+# Output all subsets
 for i, subset in enumerate(all_subsets):
     print(f'skyline in a[{i}] = {subset}')
-    skyline = find_skyline(result,all_subsets[i])
+    skyline = find_skyline(result, all_subsets[i])
     for j in skyline:
         print(j)
 end = time.perf_counter()
-print((end - start)*1000)
+print((end - start) * 1000)
