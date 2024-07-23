@@ -64,7 +64,7 @@ def classify_instance(instance, tree):
     return None
 
 
-# 示例数据
+# example data
 data = [
     {'Response time < 800?': True, 'Response time < 400?': True, 'Successability > 80': True, 'Throughput > 5': True, 'Latency < 20': True},
     {'Response time < 800?': True, 'Response time < 400?': True, 'Successability > 80': True, 'Throughput > 5': True, 'Latency < 20': False},
